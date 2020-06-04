@@ -45,10 +45,10 @@
 					<tr class="chimuc">
 						<th>STT</th>
 						<th>Tên Giáo Viên</th>
-						<th>Tên TTTN</th>
-						<th>Hướng Dẫn</th>
-						<th>Chấm</th>
-						<th>Đọc & Nhận Xét</th>
+						<th>Địa Bàn</th>
+						<th>Khoảng Cách</th>
+						<th>Số Sinh Viên</th>
+						<th>Tổng Giờ</th>
 						<th>Quản Lý</th>
 					</tr>
 					<tbody>
@@ -65,10 +65,10 @@
 							
 							?>
 							</td>
-							<td><?php echo $row["ten"]?></td>
-							<td><?php echo $row["huong_dan"]?></td>
-							<td><?php echo $row["cham"]?></td>
-							<td><?php echo $row["doc"]?></td>
+							<td><?php echo $row["dia_ban"]?></td>
+							<td><?php echo $row["khoang_cach"]?></td>
+							<td><?php echo $row["so_sv"]?></td>
+							<td><?php echo ($row["khoang_cach"]*0.02*$row["so_sv"] ); echo " giờ"; ?></td>
 							
 							<td align="center">
                                 <button type="button" id="sua" class="btn btn-warning btn-xs button-sua" title="Sửa" 
@@ -136,15 +136,16 @@
 						</select>
                       </div>
                     </div>
-                    <label for="">   Tên Thực Tập TN:</label>
+					<label for=""> Địa Bàn: </label>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
-                        <span><i class="ni ni-circle-08"></i></span>
+                        <span><i class="ni ni-circle-08"></i> </span>
                         </div>
-                        <input class="form-control" id="ten" type="text" placeholder="Tên Hiển Thị:......">
+						<input class="form-control" type="text" id="diaban">
                       </div>
                     </div>
+                   
                     <center>
                       <button type="button" id="themadminmoi" class="btn btn-success button-update">THÊM THỰC TẬP TN MỚI</button>
                     </center>
@@ -190,15 +191,7 @@
 							</select>
 					 </div>
                    </div>
-                   <label for="">   Tên Thực Tập TN:</label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                        <span><i class="ni ni-circle-08"></i></span>
-                        </div>
-                        <input class="form-control" id="tens" type="text" placeholder="Tên Hiển Thị:......">
-                      </div>
-                    </div>
+                  
                     <center>
                       <button type="button" id="suaadmin" class="btn btn-success button-update">CẬP NHẬT</button>
                     </center>
@@ -240,8 +233,8 @@
 				type: 'POST',
 				dataType: 'HTML',
 				data: {
-					ten: $('#ten').val(),
 					gv: $('#idgv').val(),
+					diaban: $('#diaban').val(),
 				},
 			success: function(data){
 				$('#thongbaothemadmin').html(data);
@@ -251,12 +244,10 @@
 
 		$('button#sua').click(function(event) {
 			var id = $(this).attr('idsua');
-            var tens = $(this).attr('tens');
            
 
 			$('#ModalSuaAdmin').modal();
 			$('#idsua').val(id);
-			$('#tens').val(tens);
 
 		});
 
@@ -267,7 +258,6 @@
 				dataType: 'HTML',
 				data: {
 					idsua: $('#idsua').val(),
-					tens: $('#tens').val(),
 					idgvs: $('#idgvs').val(),
 				},
 			success: function(data){

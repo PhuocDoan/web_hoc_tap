@@ -93,14 +93,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#nghiencuu" data-toggle="tab">
                   <i class="ni ni-air-baloon text-red"></i>
-                  <span class="nav-link-text">NCKH, TTTN</span>
+                  <span class="nav-link-text">TTTN</span>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#ngoihoidong" data-toggle="tab">
                   <i class="ni ni-single-02 text-green"></i>
-                  <span class="nav-link-text">NGỒI HỘI ĐỒNG</span>
+                  <span class="nav-link-text">HOẠT ĐỘNG KHÁC</span>
               </a>
             </li>
             <li class="nav-item">
@@ -370,10 +370,10 @@
                             <tr>
                               <th>STT</th>
                               <th>Tên Lớp</th>
-                              <th>Thi Viết</th>
-                              <th>Thi <br> Tiểu Luận</th>
+                              <th>Hình Thức Thi</th>
+                              <!-- <th>Thi <br> Tiểu Luận</th>
                               <th>Thi<br> Vấn Đáp</th>
-                              <th>Thi <br> Tốt Nghiệp</th>
+                              <th>Thi <br> Tốt Nghiệp</th> -->
                               <th>Tổng Giờ</th>
                               <th>Quản Lý</th>
                             </tr>
@@ -393,11 +393,51 @@
                                   echo $rowlop["ten_lop"];
                                   ?>
                                 </td>
-                                <td style="color: #f5365c;"><?php echo $row["thi_viet"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo $row["thi_tieu_luan"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo $row["thi_van_dap"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo $row["thi_tot_nghiep"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo ($row["thi_viet"] + $row["thi_tieu_luan"] + $row["thi_van_dap"] + $row["thi_tot_nghiep"])." giờ" ?></td>
+                                <td style="color: #f5365c;">
+                                <?php 
+                                if($row["hinh_thuc_cham"] == 1) {
+                                  echo "Thi Viết";
+                                }
+                                else if($row["hinh_thuc_cham"] == 2)
+                                {
+                                  echo "Thi Tiểu Luận";
+                                }
+                                else if($row["hinh_thuc_cham"] == 3)
+                                {
+                                  echo "Thi Vấn Đáp";
+                                }
+                                else if($row["hinh_thuc_cham"] == 4)
+                                {
+                                  echo "Thi Tốt Nghiệp";
+                                }
+                                
+                                ?>
+                                </td>
+                                
+                                <td>
+                                  <?php 
+                                 
+                                  $sqllop1 = "SELECT `si_so` FROM `lop_hoc` WHERE `id_lop` = '$idlop'";
+                                  $qrlop1 = mysqli_query($conn, $sqllop1);
+                                  $rowlop1 = mysqli_fetch_assoc($qrlop1);
+                                   if($row["hinh_thuc_cham"] == 1) {
+                                    echo ((int)$rowlop1["si_so"]*0.125);
+                                  }
+                                  else if($row["hinh_thuc_cham"] == 2)
+                                  {
+                                    echo ((int)$rowlop1["si_so"]*0.5);
+                                  }
+                                  else if($row["hinh_thuc_cham"] == 3)
+                                  {
+                                    echo ((int)$rowlop1["si_so"]*0.167);
+                                  }
+                                  else if($row["hinh_thuc_cham"] == 4)
+                                  {
+                                    echo ((int)$rowlop1["si_so"]*0.167);
+                                  }
+
+                                  ?>
+                                </td>
                                 <td align="center">
                                   <button type="button" data-toggle="modal" data-target="#ModalSuaChamThi" id="suachamthi" class="btn btn-icon btn-warning button-sua" title="Sửa" idchamthi="<?php echo $row["id_chamthi"] ?>" thiviet="<?php echo $row["thi_viet"] ?>" tieuluan="<?php echo $row["thi_tieu_luan"] ?>" vandap="<?php echo $row["thi_van_dap"] ?>" totnghiep="<?php echo $row["thi_tot_nghiep"] ?>"><span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
                                   </button>
@@ -425,7 +465,7 @@
                             <tr>
                               <th>STT</th>
                               <th>Tên Lớp</th>
-                              <th>Thời Gian</th>
+                             
                               <th>Thi <br> Tốt Nghiệp</th>
                               <th>Thi <br> Học Phần</th>
                               <th>Tổng Giờ</th>
@@ -447,10 +487,10 @@
                                   echo $rowlop["ten_lop"];
                                   ?>
                                 </td>
-                                <td style="color: #f5365c;"><?php echo $row["thoi_gian"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo $row["thi_tot_nghiep"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo $row["thi_het_hoc_phan"]." giờ" ?></td>
-                                <td style="color: #f5365c;"><?php echo ($row["thi_tot_nghiep"] + $row["thi_het_hoc_phan"])." giờ" ?></td>
+                                
+                                <td style="color: #f5365c;"><?php echo $row["thi_tot_nghiep"] ?></td>
+                                <td style="color: #f5365c;"><?php echo $row["thi_het_hoc_phan"] ?></td>
+                                <td style="color: #f5365c;"><?php echo (($row["thi_tot_nghiep"]*1.5) + $row["thi_het_hoc_phan"])." giờ" ?></td>
                                 <td align="center">
                                   <button type="button" data-toggle="modal" data-target="#ModalSuaCoiThi" id="suacoithi" class="btn btn-icon btn-warning button-sua" title="Sửa" idcoithi="<?php echo $row["id_coi_thi"] ?>" ttotnghiep="<?php echo $row["thi_tot_nghiep"] ?>" hocphan="<?php echo $row["thi_het_hoc_phan"] ?>"><span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
                                   </button>
@@ -492,10 +532,11 @@
                                 <td> <?php echo $stt5;
                                       $stt5 += 1; ?></td>
                                 <td><?php echo ($row["ten"])?></td>
-                                <td><?php echo $row["huong_dan"]?></td>
+                                <td><?php echo ($row["huong_dan"])?></td>
                                 <td><?php echo ($row["cham"])?></td>
-                                <td><?php echo $row["doc"]?></td>
-                                <td><?php echo ($row["huong_dan"] + $row["cham"] + $row["doc"]); echo " giờ";?></td>
+                                <td><?php echo ($row["doc"])?></td>
+                                <td><?php echo ($row["huong_dan"] + $row["doc"] + $row["cham"])?></td>
+                               
                                 <td align="center">
                                 <button type="button" data-toggle="modal" data-target="#ModalSuaLuanAn" id="sualuanan" class="btn btn-icon btn-warning button-sua" 
                                   title="Sửa" ids="<?php echo $row["id"] ?>" 
@@ -603,7 +644,7 @@
                         </table>
                       </div>
 <!-- ================================================================ -->
-<div class="block-table"></div>
+<!-- <div class="block-table"></div>
                       <div class="card-header bg-transparent border-0">
                         <h3 class="text-white mb-0 text-center">NGHIÊN CỨU KHOA HỌC</h3>
                       </div>
@@ -651,11 +692,11 @@
                           </tbody>
                           <?php } ?>
                         </table>
-                      </div>
+                      </div> -->
 <!-- =================================================================== -->
                   <div class="block-table"></div>
                       <div class="card-header bg-transparent border-0">
-                        <h3 class="text-white mb-0 text-center">THỰC TẬP TỐT NGHIỆP</h3>
+                        <h3 class="text-white mb-0 text-center">HƯỚNG DẪN THỰC TẬP TỐT NGHIỆP</h3>
                       </div>
                       <div class="table-responsive">
                         <table class="table align-items-center table-dark table-flush">
@@ -663,10 +704,9 @@
                           <thead class="thead-dark">
                             <tr>
                               <th>STT</th>
-                              <th>Tên</th>
-                              <th>Hướng Dẫn</th>
-                              <th>Chấm</th>
-                              <th>Đọc và Nhận Xét</th>
+                              <th>Địa Bàn</th>
+                              <th>Khoảng Cách</th>
+                              <th>Số Sinh Viên</th>
                               <th>Tổng Giờ</th>
                               <th>Quản Lý</th>
                             </tr>
@@ -677,20 +717,29 @@
                               <tr>
                                 <td> <?php echo $stt5;
                                       $stt5 += 1; ?></td>
-                                <td><?php echo ($row["ten"])?></td>
-                                <td><?php echo $row["huong_dan"]?></td>
-                                <td><?php echo ($row["cham"])?></td>
-                                <td><?php echo $row["doc"]?></td>
-                                <td><?php echo ($row["huong_dan"] + $row["cham"] + $row["doc"]); echo " giờ";?></td>
+                               
+                                 <!-- <?php
+                                 $idgiaovien = $row["id_giaovien"];
+                                 $sqlgiaovien = "SELECT `ten_sinh_vien` FROM `tai_khoan` WHERE `id_tai_khoan` = '$idgiaovien'";
+                                 $qrlop = mysqli_query($conn, $sqlgiaovien);
+                                 $rowgiaovien = mysqli_fetch_assoc($qrgiaovien);
+                                 echo $rowgiaovien["ten_sinh_vien"];
+                                
+                                
+                                ?> -->
+                                <td><?php echo $row["dia_ban"]?></td>
+                                <td><?php echo ($row["khoang_cach"])?></td>
+                                <td><?php echo $row["so_sv"]?></td>
+                                <td><?php echo ($row["khoang_cach"]*0.02*$row["so_sv"] ); echo " giờ";?></td>
                                 <td align="center">
 
                                 <td align="center">
                                   <button type="button" data-toggle="modal" data-target="#ModalSuaThucTap" id="suathuctap" class="btn btn-icon btn-warning button-sua" 
                                   title="Sửa" idtts="<?php echo $row["id"] ?>" 
-                                  tentts="<?php echo $row["ten"] ?>" 
-                                  huongdantts="<?php echo $row["huong_dan"] ?>" 
-                                  chamtts="<?php echo $row["cham"] ?>" 
-                                  doctts="<?php echo $row["doc"] ?>"><span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
+                                  diabantts="<?php echo $row["dia_ban"] ?>" 
+                                  khoangcachtts="<?php echo $row["khoang_cach"] ?>" 
+                                  sosvtts="<?php echo $row["so_sv"] ?>" 
+                                  ><span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
                                   </button>
                                 </td>
                               </tr>
@@ -763,14 +812,17 @@
                   
                     <div class="card bg-default shadow tab-pane fade" id="ngoihoidong">
                       <div class="card-header bg-transparent border-0">
-                        <h3 class="text-white mb-0 text-center">DANH SÁCH NGỒI HỘI ĐỒNG</h3>
+                        <h3 class="text-white mb-0 text-center">HOẠT ĐỘNG KHÁC</h3>
                       </div>
                       <div class="table-responsive">
                         <table class="table align-items-center table-dark table-flush">
-                        <?php while ($row = mysqli_fetch_assoc($qrngoihoidong)) { ?>
+                        <?php if (mysqli_num_rows($qrngoihoidong) > 0) { ?>
                           <thead class="thead-dark">
                             <tr>
                               <th>STT</th>
+                              <th>TÊN HOẠT ĐỘNG</th>
+                              <th>SỐ GIỜ</th>
+                              <th>GHI CHÚ</th>
                             </tr>
                           </thead>
                           <tbody class="list">
@@ -778,7 +830,27 @@
                             <?php while ($row = mysqli_fetch_assoc($qrngoihoidong)) { ?>
                               <tr>
                                 <td><?php echo $stt6;
-                                    $stt6 += 1; ?></td>
+                                    $stt6 += 1; ?>
+                                </td>
+                                <td><?php 
+                                echo $row["hoat_dong"]; ?>
+                                </td>
+                                <td><?php 
+                                echo $row["so_gio"]; ?>
+                                </td>
+                                <td><?php 
+                                echo $row["ghi_chu"]; ?>
+                                </td>
+                                <td align="center">
+                                  <button type="button" data-toggle="modal" data-target="#ModalSuaNgoiHoiDong" 
+                                  id="suangoihoidong" class="btn btn-icon btn-warning button-sua" title="Sửa" 
+                                  hoatdongs="<?php echo $row["hoat_dong"] ?>" 
+                                  id_ngoihoidong="<?php echo $row["id_ngoihoidong"] ?>" 
+                                  sogios="<?php echo $row["so_gio"] ?>" 
+                                  ghichus="<?php echo $row["ghi_chu"] ?>"><span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
+                                  </button>
+                                </td>
+
                               </tr>
                             <?php } ?>
                           </tbody>
@@ -949,7 +1021,7 @@
                   <div class="container"></div>
                   <div class="modal-body">
                   <div id="thongbaosuachamthi"></div>
-                    <label for="">Thi Viết:</label>
+                    <label for="">Hình Thức Thi:</label>
                    
                     <div class="form-group">
                       <div class="input-group">
@@ -957,45 +1029,17 @@
                         <span><i class="ni ni-circle-08"></i> </span>
                         </div>
                         <input type="text" id="idchamthi" class="hidden">
-                        <input class="form-control" id="thiviet" type="number" autofocus="autofocus" placeholder="Tên Đăng Nhập ...">
+                        <select id="hinhthuc" class="form-control">
+                          <option value="">Chọn Hình Thức Chấm</option>
+                          <option value="1">Thi Viết</option>
+                          <option value="2">Thi Tiểu Luận</option>
+                          <option value="3">Thi Vấn Đáp</option>
+                          <option value="4">Thi Tốt Nghiệp</option>
+                         
+                        </select>
                       </div>
                     </div>
-                    <label for="">  Thi Tiểu Luận:</label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                        <span><i class="ni ni-lock-circle-open"></i> </span>
-                        </div>
-                        <input class="form-control" id="tieuluan" type="number" placeholder="......">
-                      </div>
-                    </div>
-                    <label for="">Thi Vấn Đáp:</label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                        <span><i class="ni ni-lock-circle-open"></i> </span>
-                        </div>
-                        <input class="form-control" id="vandap" type="number" placeholder="........">
-                      </div>
-                    </div>
-                    <label for=""> Thi Tốt Nghiệp:</label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                        <span><i class="ni ni-single-02"></i> </span>
-                        </div>
-                        <input class="form-control" id="totnghiep" type="number">
-                      </div>
-                    </div>
-                    <label for=""> Hình Thức Thi:</label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                        <span><i class="ni ni-mobile-button"></i> </span>
-                        </div>
-                        <input class="form-control" id="hinhthucthi2" type="text" placeholder=".......">
-                      </div>
-                    </div>
+                   
                    
                     <center>
                       <button type="button" id="btnchamthi" class="btn btn-success button-update">CẬP NHẬT</button>
@@ -1127,19 +1171,34 @@
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
-                        <span><i class="ni ni-watch-time"></i> </span>
+                        <span><i class="ni ni-single-copy-04"></i> </span>
                         </div>
                         <input type="text" id="ids" class="hidden">
                         <input class="form-control" id="tens" type="text" autofocus="autofocus" placeholder="...">
                       </div>
                     </div>
+                    <label for="">Chọn Hình Thức Tham Gia:</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                        <span><i class="ni ni-briefcase-24"></i> </span>
+                        </div>
+                        <select id="hinhthucs" class="form-control">
+                        <option value="" class="">Chọn Hình Thức Tham Gia:</option>
+                          <option value="huongdan" class="">Hướng Dẫn</option>
+                          <option value="cham" class="">Chấm Chuyên Đề</option>
+                          <option value="doc" class="">Đọc Và Nhận Xét</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <label for=""> Giờ Hướng Dẫn:</label>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="huongdans" type="text" placeholder="">
+                        <input class="form-control" id="huongdans" type="number" placeholder="">
                       </div>
                     </div>
                     <label for=""> Giờ Chấm:</label>
@@ -1148,7 +1207,7 @@
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="chams" type="text" placeholder="">
+                        <input class="form-control" id="chams" type="number" placeholder="">
                       </div>
                     </div>
                     <label for=""> Giờ Đọc và Nhận Xét</label>
@@ -1157,7 +1216,7 @@
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="docs" type="text" placeholder="">
+                        <input class="form-control" id="docs" type="number" placeholder="">
                       </div>
                     </div>
 
@@ -1188,19 +1247,35 @@
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
-                        <span><i class="ni ni-watch-time"></i> </span>
+                        <span><i class="ni ni-single-copy-04"></i> </span>
                         </div>
                         <input type="text" id="idlvs" class="hidden">
                         <input class="form-control" id="tenlvs" type="text" autofocus="autofocus" >
                       </div>
                     </div>
+
+                    <label for="">Chọn Hình Thức Tham Gia:</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                        <span><i class="ni ni-briefcase-24"></i> </span>
+                        </div>
+                        <select id="hinhthuclvs" class="form-control">
+                        <option value="" class="">Chọn Hình Thức Tham Gia:</option>
+                          <option value="huongdanlv" class="">Hướng Dẫn</option>
+                          <option value="chamlv" class="">Chấm Chuyên Đề</option>
+                          <option value="doclv" class="">Đọc Và Nhận Xét</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <label for=""> Giờ Hướng Dẫn:</label>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="huongdanlvs" type="text">
+                        <input class="form-control" id="huongdanlvs" type="number">
                       </div>
                     </div>
                     <label for=""> Giờ Chấm:</label>
@@ -1209,7 +1284,7 @@
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="chamlvs" type="text" placeholder="">
+                        <input class="form-control" id="chamlvs" type="number" placeholder="">
                       </div>
                     </div>
                     <label for=""> Giờ Đọc và Nhận Xét</label>
@@ -1218,7 +1293,7 @@
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="doclvs" type="text" placeholder="">
+                        <input class="form-control" id="doclvs" type="number" placeholder="">
                       </div>
                     </div>
 
@@ -1250,19 +1325,35 @@
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
-                        <span><i class="ni ni-watch-time"></i> </span>
+                        <span><i class="ni ni-single-copy-04"></i> </span>
                         </div>
                         <input type="text" id="idkls" class="hidden">
                         <input class="form-control" id="tenkls" type="text" autofocus="autofocus" placeholder="...">
                       </div>
                     </div>
+
+                    <label for="">Chọn Hình Thức Tham Gia:</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                        <span><i class="ni ni-briefcase-24"></i> </span>
+                        </div>
+                        <select id="hinhthuckls" class="form-control">
+                        <option value="" class="">Chọn Hình Thức Tham Gia:</option>
+                          <option value="huongdankl" class="">Hướng Dẫn</option>
+                          <option value="chamkl" class="">Chấm Chuyên Đề</option>
+                          <option value="dockl" class="">Đọc Và Nhận Xét</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <label for=""> Giờ Hướng Dẫn:</label>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="huongdankls" type="text" placeholder="">
+                        <input class="form-control" id="huongdankls" type="number" placeholder="">
                       </div>
                     </div>
                     <label for=""> Giờ Chấm:</label>
@@ -1271,7 +1362,7 @@
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="chamkls" type="text" placeholder="">
+                        <input class="form-control" id="chamkls" type="number" placeholder="">
                       </div>
                     </div>
                     <label for=""> Giờ Đọc và Nhận Xét</label>
@@ -1280,7 +1371,7 @@
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="dockls" type="text" placeholder="">
+                        <input class="form-control" id="dockls" type="number" placeholder="">
                       </div>
                     </div>
 
@@ -1312,7 +1403,7 @@
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
-                        <span><i class="ni ni-watch-time"></i> </span>
+                        <span><i class="ni ni-single-copy-04"></i> </span>
                         </div>
                         <input type="text" id="idncs" class="hidden">
                         <input class="form-control" id="tenncs" type="text" autofocus="autofocus" placeholder="...">
@@ -1369,44 +1460,36 @@
                   <div class="container"></div>
                   <div class="modal-body">
                     <div id="thongbaosuathuctap"></div>
-                    <label for="">Tên:</label>
+                    <label for="">Địa Bàn:</label>
                    
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
-                        <span><i class="ni ni-watch-time"></i> </span>
+                        <span><i class="ni ni-single-copy-04"></i> </span>
                         </div>
                         <input type="text" id="idtts" class="hidden">
-                        <input class="form-control" id="tentts" type="text" autofocus="autofocus" placeholder="...">
+                        <input class="form-control" id="diabantts" type="text" autofocus="autofocus" placeholder="...">
                       </div>
                     </div>
-                    <label for=""> Giờ Hướng Dẫn:</label>
+                    <label for=""> Khoảng Cách:</label>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="huongdantts" type="text" placeholder="">
+                        <input class="form-control" id="khoangcachtts" type="number" placeholder="">
                       </div>
                     </div>
-                    <label for=""> Giờ Chấm:</label>
+                    <label for=""> Số Sinh Viên:</label>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
                         <span><i class="ni ni-watch-time"></i></span>
                         </div>
-                        <input class="form-control" id="chamtts" type="text" placeholder="">
+                        <input class="form-control" id="sosvtts" type="text" placeholder="">
                       </div>
                     </div>
-                    <label for=""> Giờ Đọc và Nhận Xét</label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                        <span><i class="ni ni-watch-time"></i></span>
-                        </div>
-                        <input class="form-control" id="doctts" type="text" placeholder="">
-                      </div>
-                    </div>
+                   
 
                     <center>
                       <button type="button" id="btnthuctap" class="btn btn-success button-update">CẬP NHẬT</button>
@@ -1483,6 +1566,57 @@
                     </div>
                     <center>
                       <button type="button" id="btndaygioi" class="btn btn-success button-update">CẬP NHẬT</button>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- End Sửa Dạy Giỏi--->
+
+            <div class="modal fade" id="ModalSuaNgoiHoiDong" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+              <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="text-center" style="color: white">SỬA THÔNG TIN BẢNG HOẠT ĐỘNG KHÁC</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="ni ni-fat-remove" style="color: white"></i>
+                    </button>
+                  </div>
+                  <div class="container"></div>
+                  <div class="modal-body">
+                    <div id="thongbaosuangoihoidong"></div>
+                    <label for="">Tên Hoạt Động:</label>
+                   
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                        <span><i class="ni ni-watch-time"></i> </span>
+                        </div>
+                        <input type="text" id="idngoihoidong" class="hidden">
+                        <input class="form-control" id="hoatdongs" type="text" autofocus="autofocus" placeholder="tên Hoạt Động...">
+                      </div>
+                    </div>
+                    <label for=""> Số Giờ:</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                        <span><i class="ni ni-watch-time"></i></span>
+                        </div>
+                        <input class="form-control" id="sogios" type="number" placeholder="Số Giờ....">
+                      </div>
+                    </div>
+                    <label for="">Ghi Chú:</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                        <span><i class="ni ni-watch-time"></i></span>
+                        </div>
+                        <input class="form-control" id="ghichus" type="text" placeholder="Ghi Chú....">
+                      </div>
+                    </div>
+                    <center>
+                      <button type="button" id="btnngoihoidong" class="btn btn-success button-update">CẬP NHẬT</button>
                     </center>
                   </div>
                 </div>
@@ -1651,16 +1785,10 @@
 
       $('button#suachamthi').click(function(event) {
         var idchamthi = $(this).attr('idchamthi');
-        var thiviet = $(this).attr('thiviet');
-        var tieuluan = $(this).attr('tieuluan');
-        var vandap = $(this).attr('vandap');
-        var totnghiep = $(this).attr('totnghiep');
+       
 
         $('#idchamthi').val(idchamthi);
-        $('#thiviet').val(thiviet);
-        $('#tieuluan').val(tieuluan);
-        $('#vandap').val(vandap);
-        $('#totnghiep').val(totnghiep);
+       
       });
 
       $('button#suacoithi').click(function(event) {
@@ -1681,6 +1809,17 @@
         $('#iddaygioi').val(iddaygioi);
         $('#bais').val(bais);
         $('#chams').val(chams);
+      });
+
+      $('button#suangoihoidong').click(function(event) {
+        var idngoihoidong = $(this).attr('id_ngoihoidong');
+        var hoatdongs = $(this).attr('hoatdongs');
+        var sogios = $(this).attr('sogios');
+        var ghichus = $(this).attr('ghichus');
+        $('#idngoihoidong').val(idngoihoidong);
+        $('#hoatdongs').val(hoatdongs);
+        $('#sogios').val(sogios);
+        $('#ghichus').val(ghichus);
       });
 
       $('#btnthongtin').click(function(event) {
@@ -1748,10 +1887,8 @@
           dataType: 'HTML',
           data: {
             idchamthi: $('#idchamthi').val(),
-            thiviet: $('#thiviet').val(),
-            tieuluan: $('#tieuluan').val(),
-            vandap: $('#vandap').val(),
-            totnghiep: $('#totnghiep').val(),
+            hinhthuc: $('#hinhthuc').val(),
+           
           },
           success: function(data) {
             $('#thongbaosuachamthi').html(data);
@@ -1791,6 +1928,23 @@
         });
       });
 
+      $('#btnngoihoidong').click(function(event) {
+        $.ajax({
+          url: 'user/sua-hoidong.php',
+          type: 'POST',
+          dataType: 'HTML',
+          data: {
+            idngoihoidong: $('#idngoihoidong').val(),
+            hoatdongs: $('#hoatdongs').val(),
+            sogios: $('#sogios').val(),
+            ghichus: $('#ghichus').val(),
+          },
+          success: function(data) {
+            $('#thongbaosuangoihoidong').html(data);
+          }
+        });
+      });
+
      
 
       //=================================================================================Start 
@@ -1802,9 +1956,36 @@
         var doclvs = $(this).attr('doclvs');
         $('#idlvs').val(idlvs);
         $('#tenlvs').val(tenlvs);
-        $('#huongdanlvs').val(huongdanlvs);
-        $('#chamlvs').val(chamlvs);
-        $('#doclvlvs').val(docs);
+       
+
+        $('select#hinhthuclvs').on('change', function() {
+          if(this.value == "huongdanlv"){
+          $('input#chamlvs').attr("readonly", true);
+          $('input#doclvs').attr("readonly", true);
+          $('input#huongdanlvs').removeAttr( "readonly" );
+          $('#chamlvs').val(0);
+          $('#doclvs').val(0);
+          $('#huongdanlvs').val(huongdanlvs);
+        } 
+        if(this.value == "chamlv"){
+          $('input#huongdanlvs').attr("readonly", true);
+          $('input#doclvs').attr("readonly", true);
+          $('input#chamlvs').removeAttr( "readonly" );
+          $('#huongdanlvs').val(0);
+          $('#doclvs').val(0);
+          $('#chamlvs').val(chamlvs);
+        } 
+        if( this.value == "doclv"){
+          $('input#chamlvs').attr("readonly", true);
+          $('input#huongdanlvs').attr("readonly", true);
+          $('input#doclvs').removeAttr( "readonly" );
+          $('#huongdanlvs').val(0);
+          $('#chamlvs').val(0);
+          $('#doclvs').val(docs);
+        } 
+          
+        });
+
       });
 
       $('#btnluanvan').click(function(event) {
@@ -1835,12 +2016,45 @@
         var docs = $(this).attr('docs');
         $('#ids').val(ids);
         $('#tens').val(tens);
-        $('#huongdans').val(huongdans);
-        $('#chams').val(chams);
-        $('#docs').val(docs);
+        
+       
+       
+        $('select#hinhthucs').on('change', function() {
+          if(this.value == "huongdan"){
+          $('input#chams').attr("readonly", true);
+          $('input#docs').attr("readonly", true);
+          $('input#huongdans').removeAttr( "readonly" );
+          $('#chams').val(0);
+          $('#docs').val(0);
+          $('#huongdans').val(huongdans);
+          
+        } 
+        if(this.value == "cham"){
+          $('input#huongdans').attr("readonly", true);
+          $('input#docs').attr("readonly", true);
+          $('input#chams').removeAttr( "readonly" );
+          $('#huongdans').val(0);
+          $('#docs').val(0);
+          $('#chams').val(chams);
+        } 
+        if( this.value == "doc"){
+          $('input#chams').attr("readonly", true);
+          $('input#huongdans').attr("readonly", true);
+          $('input#docs').removeAttr( "readonly" );
+          $('#huongdans').val(0);
+          $('#chams').val(0);
+          $('#docs').val(docs);
+        } 
+          
+        });
+       
+      
+        
+        
       });
 
       $('#btnluanan').click(function(event) {
+        
         $.ajax({
           url: 'user/sua-luan-an.php',
           type: 'POST',
@@ -1848,9 +2062,9 @@
           data: {
             ids: $('#ids').val(),
             tens: $('#tens').val(),
-            huongdans: $('#huongdans').val(),
-            chams: $('#chams').val(),
-            docs: $('#docs').val(),
+            huongdans: parseFloat($('#huongdans').val()),
+            chams: parseFloat($('#chams').val()),
+            docs: parseFloat($('#docs').val()),
            
           },
           success: function(data) {
@@ -1870,9 +2084,34 @@
         var dockls = $(this).attr('dockls');
         $('#idkls').val(idkls);
         $('#tenkls').val(tenkls);
-        $('#huongdankls').val(huongdankls);
-        $('#chamkls').val(chamkls);
-        $('#dockls').val(dockls);
+        
+        $('select#hinhthuckls').on('change', function() {
+          if(this.value == "huongdankl"){
+          $('input#chamkls').attr("readonly", true);
+          $('input#dockls').attr("readonly", true);
+          $('input#huongdankls').removeAttr( "readonly" );
+          $('#chamkls').val(0);
+          $('#dockls').val(0);
+          $('#huongdankls').val(huongdankls);
+        } 
+        if(this.value == "chamkl"){
+          $('input#huongdankls').attr("readonly", true);
+          $('input#dockls').attr("readonly", true);
+          $('input#chamkls').removeAttr( "readonly" );
+          $('#huongdankls').val(0);
+          $('#dockls').val(0);
+          $('#chamkls').val(chamkls);
+        } 
+        if( this.value == "dockl"){
+          $('input#chamkls').attr("readonly", true);
+          $('input#huongdankls').attr("readonly", true);
+          $('input#dockls').removeAttr( "readonly" );
+          $('#huongdankls').val(0);
+          $('#chamkls').val(0);
+          $('#dockls').val(docs);
+        } 
+          
+        });
       });
 
       $('#btnkhoaluan').click(function(event) {
@@ -1929,15 +2168,14 @@
 
       $('button#suathuctap').click(function(event) {
         var idtts = $(this).attr('idtts');
-        var tentts = $(this).attr('tentts');
-        var huongdantts = $(this).attr('huongdantts');
-        var chamtts = $(this).attr('chamtts');
-        var doctts = $(this).attr('doctts');
+        var diabantts = $(this).attr('diabantts');
+        var khoangcachtts = $(this).attr('khoangcachtts');
+        var sosvtts = $(this).attr('sosvtts');
         $('#idtts').val(idtts);
-        $('#tentts').val(tentts);
-        $('#huongdantts').val(huongdantts);
-        $('#chamtts').val(chamtts);
-        $('#doctts').val(doctts);
+        $('#diabantts').val(diabantts);
+        $('#khoangcachtts').val(khoangcachtts);
+        $('#sosvtts').val(sosvtts);
+      
       });
 
       $('#btnthuctap').click(function(event) {
@@ -1947,10 +2185,10 @@
           dataType: 'HTML',
           data: {
             idtts: $('#idtts').val(),
-            tentts: $('#tentts').val(),
-            huongdantts: $('#huongdantts').val(),
-            chamtts: $('#chamtts').val(),
-            doctts: $('#doctts').val(),
+            diabantts: $('#diabantts').val(),
+            khoangcachtts: $('#khoangcachtts').val(),
+            sosvtts: $('#sosvtts').val(),
+            
            
           },
           success: function(data) {
