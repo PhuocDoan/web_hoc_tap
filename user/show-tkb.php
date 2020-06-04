@@ -1,46 +1,46 @@
 <?php
-	$title = "Thời Khóa Biểu - ";
-	session_start();
-	error_reporting(0);
-  $url = "http://localhost/hvan/";
-  include_once('../config/config.php');
-  if(isset($_GET["tkb"])){
-    $idlop =  $_GET["tkb"];
-    }
-    $sql = "SELECT `thoi_khoa_bieu`, `ten_lop` FROM `lop_hoc` WHERE `id_lop` = '$idlop'";
-    $qr = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($qr);
-    $event = $row["thoi_khoa_bieu"];
-    $lop = $row["ten_lop"];
- ?>
+$title = "Thời Khóa Biểu - ";
+session_start();
+error_reporting(0);
+$url = "http://localhost:8081/app/";
+include_once '../config/config.php';
+if (isset($_GET["tkb"])) {
+    $idlop = $_GET["tkb"];
+}
+$sql = "SELECT `thoi_khoa_bieu`, `ten_lop` FROM `lop_hoc` WHERE `id_lop` = '$idlop'";
+$qr = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($qr);
+$event = $row["thoi_khoa_bieu"];
+$lop = $row["ten_lop"];
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <title><?php echo $title;?>Khoa Quản Lý Nhà Nước</title>
+  <title><?php echo $title; ?>Khoa Quản Lý Nhà Nước</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  <!-- <link rel="stylesheet" href="<?php echo $url;?>css/reset.css"> -->
+
+  <!-- <link rel="stylesheet" href="<?php echo $url; ?>css/reset.css"> -->
   <title>Trang chủ - Học Viện An ninh Nhân dân</title>
   <!-- Favicon -->
-  <link rel="icon" href="<?php echo $url;?>assets/img/brand/logoC500.png" type="image/png">
+  <link rel="icon" href="<?php echo $url; ?>assets/img/brand/logoC500.png" type="image/png">
   <!-- Icons -->
-  <link rel="stylesheet" href="<?php echo $url;?>assets/css/calendar/fullcalendar.css" />
+  <link rel="stylesheet" href="<?php echo $url; ?>assets/css/calendar/fullcalendar.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo $url;?>assets/css/style.css" type="text/css">
-  <?php  
-  if($_SESSION["taikhoan"] == NULL){?>
+  <link rel="stylesheet" href="<?php echo $url; ?>assets/css/style.css" type="text/css">
+  <?php
+if ($_SESSION["taikhoan"] == null) {?>
     <script>
       window.location.href="tai-khoan/dang-nhap.php";
     </script>
-  <?php } else{
- ?>
- 
-  <script src="<?php echo $url;?>assets/js/calendar/jquery.min.js"></script>
-  <script src="<?php echo $url;?>assets/js/calendar/jquery-ui.min.js"></script>
-  <script src="<?php echo $url;?>assets/js/calendar/moment.min.js"></script>
-  <script src="<?php echo $url;?>assets/js/calendar/fullcalendar.min.js"></script>
-  <script src="<?php echo $url;?>assets/js/calendar/locale-all.js"></script>
+  <?php } else {
+    ?>
+
+  <script src="<?php echo $url; ?>assets/js/calendar/jquery.min.js"></script>
+  <script src="<?php echo $url; ?>assets/js/calendar/jquery-ui.min.js"></script>
+  <script src="<?php echo $url; ?>assets/js/calendar/moment.min.js"></script>
+  <script src="<?php echo $url; ?>assets/js/calendar/fullcalendar.min.js"></script>
+  <script src="<?php echo $url; ?>assets/js/calendar/locale-all.js"></script>
 
   <script>
    $(document).ready(function() {
@@ -54,7 +54,7 @@
       center:'title',
       right: '',
      },
-     events: <?php echo $event;?>,
+     events: <?php echo $event; ?>,
      selectable:true,
      selectHelper:true,
      //select để thêm thời khóa biểu
@@ -62,7 +62,7 @@
      {
       var title = prompt("Nhập Tên Ca Học (Không Dấu)");
       var id = prompt("Tiết Học Số Mấy:");
-      
+
       if(title)
       {
        var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
@@ -76,12 +76,12 @@
          calendar.fullCalendar('refetchEvents');
          alert("Thêm Ca Học Thành Công");
          window.setTimeout(function(){window.location.href="";}, 10);
-         
+
         }
        })
       }
      },
-    
+
      eventClick:function(event)
      {
       if(confirm("Bạn có thực sự muốn xóa ca học này không ?"))
@@ -97,14 +97,14 @@
          alert("Ca Học Đã Được Xóa Thành Công!!");
          window.setTimeout(function(){window.location.href="";}, 10);
 
-        
+
         }
        })
       }
      },
     });
    });
-    
+
    </script>
   </head>
   <body class="thoi_khoa_bieu">
@@ -112,8 +112,9 @@
    <h2 align="center">
    <span class="icon-tkb glyphicon glyphicon-calendar" aria-hidden="true"></span>
      <a href="#" class="thoi_khoa_bieu">
-  
-     THỜI KHÓA BIỂU LỚP<?php echo " "; echo $lop; ?></a></h2>
+
+     THỜI KHÓA BIỂU LỚP<?php echo " ";
+    echo $lop; ?></a></h2>
    <br />
    <div class="container">
       <div id="thongbao"></div>
@@ -121,5 +122,5 @@
       <input type="text" id="idt" class="hidden" value="<?php echo $_GET["tkb"]; ?>">
    </div>
    </body>
-</html> 
-<?php } ?>
+</html>
+<?php }?>
