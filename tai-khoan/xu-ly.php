@@ -16,13 +16,14 @@ if ($taikhoanlg == null || $matkhaulg == null) {?>
       	<strong>ERROR!</strong> Các trường nhập không được để trống.
     	</div>
 	<?php } else {
-    if ($captcha == '') {?>
-			<div class="alert alert-warning fade in" role="alert">
-					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					<strong>ERROR!</strong> Hacker dectected
-				</div>
-		<?php
-} else if (mysqli_num_rows($chay) > 0) {
+    { /*    if ($captcha == '') {?>
+<div class="alert alert-warning fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+<strong>ERROR!</strong> Hacker dectected
+</div>
+<?php
+} else*/}
+    if (mysqli_num_rows($chay) > 0) {
         session_start();
         $_SESSION["taikhoan"] = $xem["id_tai_khoan"];
         $_SESSION["nhomtk"] = $xem["nhom_tai_khoan"];

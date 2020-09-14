@@ -8,8 +8,8 @@ include_once '../header.php';
 <div class="main-content">
     <!-- Header -->
     <div class="header bg-gradient-primary py-5 py-lg-7 pt-lg-9">
-      <h1 class="text-white text-center display-2" style="font-weight: 700;">BÁO CÁO TÌM HIỂU GIẢI PHÁP BẢO MẬT ỨNG DỤNG WEB</h1>
-      <p class="text-lead text-white text-center mb-5 display-3">Trần Thiện Dinh - Đoàn Hữu Phước</p>
+      <h1 class="text-white text-center display-2" style="font-weight: 700;">Khoa CN và ANTT</h1>
+      <p class="text-lead text-white text-center mb-5 display-3">Nhóm 6</p>
     </div>
     </div>
     <!-- Page content -->
@@ -43,7 +43,7 @@ include_once '../header.php';
                   	<input type="checkbox" checked="checked"> Lưu đăng nhập
                   	</label>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6LfPOckZAAAAAOMaUAIl2c9NuCPsfsBuLDULuNQu"></div>
+                <!-- <div class="g-recaptcha" data-sitekey="6LfPOckZAAAAAOMaUAIl2c9NuCPsfsBuLDULuNQu"></div> -->
                 <div class="text-center">
                 <input type="submit" id="dangnhaptk" class="btn btn-primary my-4" value="ĐĂNG NHẬP">
                 </div>
