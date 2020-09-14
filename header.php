@@ -1,12 +1,12 @@
 <?php
 session_start();
 error_reporting(0);
-$url = "http://localhost:8081/app/";
+$url = "http://localhost:8080/app/";
 ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <title><?php echo $title; ?>Khoa Quản Lý Nhà Nước</title>
+  <title><?php echo $title; ?>Khoa CN & ANTT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -37,7 +37,7 @@ $url = "http://localhost:8081/app/";
 
   <script src="<?php echo $url; ?>assets/js/argon.js?v=1.2.0"></script>
   <script src="<?php echo $url; ?>assets/js/style.js"></script>
-
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 

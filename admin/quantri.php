@@ -1,9 +1,9 @@
 <?php
-		if($_SESSION["taikhoan"] == NULL){ ?>
+if ($_SESSION["taikhoan"] == null) {?>
 			<script>
 				window.location.href="../tai-khoan/dang-nhap.php";
 			</script>
-		<?php } elseif($_SESSION["nhomtk"] != 1){ ?>
+		<?php } elseif ($_SESSION["nhomtk"] != 1) {?>
 			<div class="alert alert-danger fade in" role="alert" style="max-width:400px;margin:0 auto">
 		      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 		      <strong>ERROR!</strong> Bạn không đủ quyền để truy cập trang này, trở lại trang chủ sau 3s.
@@ -11,8 +11,8 @@
 	    	window.setTimeout(function(){window.location.href="../index.php";}, 3000);
 	    	</script>
 		    </div>
-    <?php }else {?>
-      
+    <?php } else {?>
+
 
   <!-- START  -->
   <body>
@@ -66,7 +66,7 @@
                 <span class="nav-link-text logout">Đăng Xuất</span>
               </a>
             </li>
-           
+
           </ul>
           <!-- Divider -->
           <hr class="my-3">
@@ -84,9 +84,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <button class="ni ni-bullet-list-67 collap" >
-            
+
           </button>
-         
+
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -104,8 +104,8 @@
                 <i class="ni ni-zoom-split-in"></i>
               </a>
             </li>
-            
-           
+
+
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
           <li class="nav-item dropdown">
@@ -149,7 +149,7 @@
                               <div>
                                 <h6>
                                   <i class="ni ni-briefcase-24 mr-2"></i>
-                                  Khoa Quản Lý Nhà Nước Về An Ninh Quốc Gia
+                                  Khoa CN & ANTT
                                 </h6>
                               </div>
                               <div>
@@ -171,7 +171,7 @@
                         <i class="ni ni-settings-gear-65"></i>
                       </button>
                     </li>
-                   
+
           </ul>
         </div>
       </div>
@@ -179,54 +179,51 @@
     <!-- Header -->
   <!-- END  -->
 			<?php
-				if($_GET["menu"] == "bangdk"){
-					include_once('bangdk.php');
-				} elseif($_GET["menu"] == "phancong"){
-					include_once('phancong.php');
-				} elseif($_GET["menu"] == "lichtrinh"){
-					include_once('lichtrinh.php');
-        } elseif($_GET["menu"] == "hoatdongkhac"){
-          include_once('hoatdongkhac.php');
-        } elseif($_GET["menu"] == "admin"){
-          include_once('admin.php');
-        } elseif($_GET["menu"] == "giaovien"){
-          include_once('giaovien.php');
-        } elseif($_GET["menu"] == "lop"){
-          include_once('lop.php');
-        } elseif($_GET["menu"] == "chamthi"){
-          include_once('chamthi.php');
-        } elseif($_GET["menu"] == "coithi"){
-          include_once('coithi.php');
-        } elseif($_GET["menu"] == "nghiencuu"){
-          include_once('nghiencuu.php');
-        } elseif($_GET["menu"] == "daygioi"){
-          include_once('daygioi.php');
-        } elseif($_GET["menu"] == "ngoihoidong"){
-          include_once('hoidong.php');
-        } elseif($_GET["menu"] == "luanan"){
-          include_once('luan-an.php');
-        } elseif($_GET["menu"] == "luanvan"){
-          include_once('luan-van.php');
-        } elseif($_GET["menu"] == "khoaluan"){
-          include_once('khoa-luan.php');
-        } elseif($_GET["menu"] == "thuctap"){
-          include_once('thuc-tap.php');
-        }  elseif($_GET["menu"] == "nghien-cuu"){
-          include_once('nghien-cuu.php');
-        } elseif($_GET["menu"] == "tong-hop"){
-          include_once('tong-hop.php');
-        } 
+if ($_GET["menu"] == "bangdk") {
+    include_once 'bangdk.php';
+} elseif ($_GET["menu"] == "phancong") {
+    include_once 'phancong.php';
+} elseif ($_GET["menu"] == "lichtrinh") {
+    include_once 'lichtrinh.php';
+} elseif ($_GET["menu"] == "hoatdongkhac") {
+    include_once 'hoatdongkhac.php';
+} elseif ($_GET["menu"] == "admin") {
+    include_once 'admin.php';
+} elseif ($_GET["menu"] == "giaovien") {
+    include_once 'giaovien.php';
+} elseif ($_GET["menu"] == "lop") {
+    include_once 'lop.php';
+} elseif ($_GET["menu"] == "chamthi") {
+    include_once 'chamthi.php';
+} elseif ($_GET["menu"] == "coithi") {
+    include_once 'coithi.php';
+} elseif ($_GET["menu"] == "nghiencuu") {
+    include_once 'nghiencuu.php';
+} elseif ($_GET["menu"] == "daygioi") {
+    include_once 'daygioi.php';
+} elseif ($_GET["menu"] == "ngoihoidong") {
+    include_once 'hoidong.php';
+} elseif ($_GET["menu"] == "luanan") {
+    include_once 'luan-an.php';
+} elseif ($_GET["menu"] == "luanvan") {
+    include_once 'luan-van.php';
+} elseif ($_GET["menu"] == "khoaluan") {
+    include_once 'khoa-luan.php';
+} elseif ($_GET["menu"] == "thuctap") {
+    include_once 'thuc-tap.php';
+} elseif ($_GET["menu"] == "nghien-cuu") {
+    include_once 'nghien-cuu.php';
+} elseif ($_GET["menu"] == "tong-hop") {
+    include_once 'tong-hop.php';
+} else {
+    include_once 'bangdk.php';
+}
 
-       
-        else{
-					include_once('bangdk.php');
-        }
-        
-			 ?>
-    
-    
+    ?>
 
-    <?php } ?>
+
+
+    <?php }?>
 </div>
 
 
@@ -244,7 +241,7 @@
                   <div class="modal-body">
                     <div id="thongbaosuaadmin"></div>
                     <label for=""> Tên Tài Khoản Đăng Nhập:</label>
-                   
+
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon">
@@ -268,7 +265,7 @@
                         </div>
                       </div>
                     </div>
-                   
+
                     <label for=""> Tên Hiển Thị:</label>
                     <div class="form-group">
                       <div class="input-group">
@@ -305,9 +302,9 @@
             </div>
           </div>
           <!-- End Sửa Thông Tin  -->
- <?php 
-	include_once('../footer.php');
- ?>
+ <?php
+include_once '../footer.php';
+?>
  <script>
  	$(document).ready(function() {
 
@@ -362,7 +359,7 @@
 				$('#thongbaosuaadmin').html(data);
 			}
 			});
-			
+
 		});
 
  		// $('a#dieukhien').addClass('chon');

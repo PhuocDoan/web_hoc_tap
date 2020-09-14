@@ -1,14 +1,14 @@
 
 <?php
-	$title = "Thời Khóa Biểu - ";
-	include_once('../header.php');
-  include_once('../config/config.php');
-  if($_SESSION["taikhoan"] == NULL){?>
+$title = "Thời Khóa Biểu - ";
+include_once '../header.php';
+include_once '../config/config.php';
+if ($_SESSION["taikhoan"] == null) {?>
     <script>
       window.location.href="tai-khoan/dang-nhap.php";
     </script>
-  <?php } else{
- ?>
+  <?php } else {
+    ?>
 <div class="container-fluid">
 	<!-- Navbar -->
 	<div class="hidden-lg hidden-md hidden-md hidden-sm navbar navbar-default navbar-fixed-top " role="navigation">
@@ -30,11 +30,11 @@
               <?php echo $_SESSION["tensv"]; ?> <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-              <?php if($_SESSION["nhomtk"] == 1){ ?>
+              <?php if ($_SESSION["nhomtk"] == 1) {?>
                 <li><a href="admin">
                 <span class="glyphicon glyphicon-tower"></span>
                 Trang Quản Trị</a></li>
-                <?php } else {} ?>
+                <?php } else {}?>
                 <li><a href="thong-tin.php">
                 <span class="glyphicon glyphicon-user"></span>
                 Trang Cá Nhân</a></li>
@@ -68,7 +68,7 @@
             <tr>
             <!-- Khoa của giảng viên  -->
               <td style="width:30px;" title="Sinh Viên khoa"><span class="glyphicon glyphicon-th-large"></span></td>
-              <td><strong>Khoa Quản lý Nhà nước về An ninh Quốc gia</strong></td>
+              <td><strong>Khoa CN & ANTT</strong></td>
             </tr>
             <tr>
              <!-- Số điện thoại của giảng viên  -->
@@ -82,22 +82,22 @@
             </tr>
           </table>
         </a>
-          <?php if($_SESSION["nhomtk"] == 1){ ?>
+          <?php if ($_SESSION["nhomtk"] == 1) {?>
           <a href="admin" class="list-group-item" style="text-align:center">
           <span style="font-size:40px; color: #D9EDF7" class="glyphicon glyphicon-cog"></span> <br>
           QUẢN TRỊ
           </a>
           <?php } else {?>
-        
+
           <button type="button" id="sua" class="setting">
               <a href="../thong-tin.php">
             <span style="font-size:40px; color: #D9EDF7" class="glyphicon glyphicon-cog"></span> <br>
             <span> TRANG CHỦ</span>
             </a>
         </button>
-         <?php 
-        } ?>
-        
+         <?php
+}?>
+
 			  <a href="tai-khoan/dang-xuat.php" class="list-group-item" style="text-align:center">
 			  <span style="font-size:40px; color:#D9534F" class="glyphicon glyphicon-log-out"></span> <br>
 			 ĐĂNG XUẤT
@@ -110,41 +110,41 @@
     <div style="color:#FFF" class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
     <div id="dulieudiem">
         <?php
-            if(isset($_GET["tkb"])){
-                $idlop = $_GET["tkb"];
-            }
-            $sql = "SELECT * FROM `lop_hoc` WHERE `id_lop` = '$idlop'";
-            $qr = mysqli_query($conn, $sql);
-        ?>    
+if (isset($_GET["tkb"])) {
+        $idlop = $_GET["tkb"];
+    }
+    $sql = "SELECT * FROM `lop_hoc` WHERE `id_lop` = '$idlop'";
+    $qr = mysqli_query($conn, $sql);
+    ?>
 <!-- Danh Sách Giảng Dạy -->
-        <?php if(mysqli_num_rows($qr) > 0) {?>
+        <?php if (mysqli_num_rows($qr) > 0) {?>
             <div class=" bang col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <h2><span class="glyphicon glyphicon-calendar icon-table"></span>THỜI KHÓA BIỂU</h2>
-                        <?php while($row = mysqli_fetch_assoc($qr)){?>
-                            <?php 
-                             $thoikhoabieu = $row["thoi_khoa_bieu"];
-                             $jsontkb = json_decode($thoikhoabieu, true);
-                             foreach($jsontkb as $key=>$value){?>
+                        <?php while ($row = mysqli_fetch_assoc($qr)) {?>
+                            <?php
+$thoikhoabieu = $row["thoi_khoa_bieu"];
+        $jsontkb = json_decode($thoikhoabieu, true);
+        foreach ($jsontkb as $key => $value) {?>
                               <div class="tkb col-xs-2 col-sm2 col-md-2 col-lg-2">
                                  <p class="ngay" style="color:black"><?php echo $value["ngay"]; ?></p>
                                  <p class="buoi" style="color:black"><?php echo $value["buoi"]; ?></p>
                                  <p class="ca" style="color:black"><?php echo $value["ca"]; ?></p>
                                 <button type="button" id="sua" class="btn btn-warning btn-xs" title="Sửa"
-                                  ngays="<?php echo $value["ngay"];?>"
-                                  buois="<?php echo $value["buoi"];?>" 
-                                  cas="<?php echo $value["ca"];?>" 
-                                  ids="<?php echo $_GET["tkb"]?>"
+                                  ngays="<?php echo $value["ngay"]; ?>"
+                                  buois="<?php echo $value["buoi"]; ?>"
+                                  cas="<?php echo $value["ca"]; ?>"
+                                  ids="<?php echo $_GET["tkb"] ?>"
                                   phantus="<?php echo $key; ?>"
                                 ><span class="glyphicon glyphicon-edit"></span>
 								</button>
-  								<button type="button" id="xoa" phantu="<?php echo $key; ?>" xoa="<?php echo $_GET["tkb"]?>" class="btn btn-danger btn-xs" title="Xóa"><span class="glyphicon glyphicon-trash"></span>
+  								<button type="button" id="xoa" phantu="<?php echo $key; ?>" xoa="<?php echo $_GET["tkb"] ?>" class="btn btn-danger btn-xs" title="Xóa"><span class="glyphicon glyphicon-trash"></span>
   								</button>
                             </div>
                         <?php
-                             }
-                        ?>
-                        <?php }} ?>
-                  <?php } ?>
+}
+        ?>
+                        <?php }}?>
+                  <?php }?>
                   <br>
 <div id="thongbaoxoa"></div>
                   </div>
@@ -233,7 +233,7 @@
 			    <input class="form-control" id="buois" type="text" placeholder="">
 			    </div>
 				</div>
-				
+
 				Ca Học:
 				<div class="form-group">
 			    <div class="input-group">
@@ -255,15 +255,15 @@
 <!-- End Modal Edit Admin -->
 
 <script>
-	
+
 	$(document).ready(function() {
 		$('button#xoa').click(function(event) {
             var id = $(this).attr('xoa');
             var phantu = $(this).attr('phantu');
-            
+
 			var xoa = confirm("Bạn có thực sự muốn xóa Ca Học Này?");
 			if (xoa == true) {
-				
+
 				    $.ajax({
 				    	url: 'xoa-thoikhoabieu.php',
 				    	type: 'POST',
@@ -271,14 +271,14 @@
                         data: {
                             id: id,
                             phantu: phantu
-                        
+
                         },
-                        
+
 				    });
 				    alert("Xóa Thành Công!");
 				    location.reload();
 				}
-			
+
 		});
 
 		$('button#themadminmoi').click(function(event) {
@@ -327,7 +327,7 @@
 				$('#thongbaosuaadmin').html(data);
 			}
 			});
-			
+
 		});
 
 	});
@@ -335,9 +335,9 @@
 </script>
 
 </script>
-      <?php 
-        include_once('footer.php');
-      ?>
+      <?php
+include_once 'footer.php';
+?>
 
 
 
@@ -349,19 +349,19 @@
 
 
 
-            
 
 
 
-    
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-    
+
+
+
+
+
+
+
+
+
+
+
+
+

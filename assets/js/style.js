@@ -1,48 +1,49 @@
 /* Jquery by TranDuc */
 
 /*== Form Đăng Nhập ==*/
-$(document).ready(function() {
-	$('#dangnhaptk').click(function(event) {
-	
+$(document).ready(function () {
+	$('#dangnhaptk').click(function (event) {
+
 		$.ajax({
 			url: 'xu-ly.php',
 			type: 'POST',
 			dataType: 'html',
 			data: {
 				taikhoanlg: $('#taikhoanlg').val(),
-				matkhaulg: $('#matkhaulg').val()
+				matkhaulg: $('#matkhaulg').val(),
+				"g-recaptcha-response": $('textarea[id="g-recaptcha-response"]').val()
 			},
-		success: function(data){
-			$('#thongbaodn').html(data);
-		}
+			success: function (data) {
+				$('#thongbaodn').html(data);
+			}
 		});
-		
+
 	});
 });
 
 /*== Hiển Thị Lớp ==*/
-$(document).ready(function() {
-	$('#svkhoa').change(function(event) {
+$(document).ready(function () {
+	$('#svkhoa').change(function (event) {
 		var id = $(this).val();
-		$.get('xu-ly/hien-thi-lop.php',{id:id}, function(data) {
+		$.get('xu-ly/hien-thi-lop.php', { id: id }, function (data) {
 			$('#svlop').html(data);
 		});
 	});
 });
 
 /*== Hiển Thị Học Kỳ ==*/
-$(document).ready(function() {
-	$('#svlop').change(function(event) {
+$(document).ready(function () {
+	$('#svlop').change(function (event) {
 		var lop = $(this).val();
-		$.get('xu-ly/hien-thi-hoc-ky.php', {lop:lop}, function(data) {
-             $('#hocky').html(data);
+		$.get('xu-ly/hien-thi-hoc-ky.php', { lop: lop }, function (data) {
+			$('#hocky').html(data);
 		});
 	});
 });
 
 /*== Hiển Thị Môn Học ==*/
-$(document).ready(function() {
-	$('#hocky').change(function(event) {
+$(document).ready(function () {
+	$('#hocky').change(function (event) {
 		var idhk = $(this).val();
 		$.ajax({
 			url: 'xu-ly/hien-thi-mon-hoc.php',
@@ -52,17 +53,17 @@ $(document).ready(function() {
 				idhk: idhk,
 				lop: $('#svlop').val()
 			},
-		success: function(data) {
-			$('#monhoc').html(data);
-		}
+			success: function (data) {
+				$('#monhoc').html(data);
+			}
 		});
-		
+
 	});
 });
 
 /*== Thêm Sinh Viên ==*/
-$(document).ready(function() {
-	$('#themsinhvien').click(function(event) {
+$(document).ready(function () {
+	$('#themsinhvien').click(function (event) {
 		$.ajax({
 			url: 'xu-ly/them-sinh-vien.php',
 			type: 'POST',
@@ -77,10 +78,10 @@ $(document).ready(function() {
 				ngaysinh: $('#ngaysinh').val(),
 				nhanxet: $('#nhanxet').val()
 			},
-		success: function(data){
-			$('#thongbaothem').html(data);
-		}
+			success: function (data) {
+				$('#thongbaothem').html(data);
+			}
 		});
-		
+
 	});
 });

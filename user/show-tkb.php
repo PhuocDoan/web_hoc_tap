@@ -2,7 +2,7 @@
 $title = "Thời Khóa Biểu - ";
 session_start();
 error_reporting(0);
-$url = "http://localhost:8081/app/";
+$url = "http://localhost:8080/app/";
 include_once '../config/config.php';
 if (isset($_GET["tkb"])) {
     $idlop = $_GET["tkb"];
@@ -16,7 +16,7 @@ $lop = $row["ten_lop"];
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <title><?php echo $title; ?>Khoa Quản Lý Nhà Nước</title>
+  <title><?php echo $title; ?>Khoa CN & ANTT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 

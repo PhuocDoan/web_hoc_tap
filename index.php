@@ -8,7 +8,7 @@
 		</script>
 	<?php } else { ?>
 		<script>
-			window.location.href="thong-tin.php";
+			window.location.href="tai-khoan/dang-nhap.php";
 		</script>
 	<?php }
  ?>
